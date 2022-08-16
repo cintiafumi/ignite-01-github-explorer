@@ -290,3 +290,25 @@ yarn webpack serve
 Open `localhost:8080` in the browser.
 
 Any changes in `App.js` will be automatically updated in the browser.
+
+## Source maps
+
+To see the original source when there is an error in the code, instead of looking at bundle code.
+
+Add `'eval-source-map'` in the `webpack.config.js`
+
+```js
+const isDevelopment = true
+
+module.exports = {
+  // ...
+  devtool:  isDevelopment ? 'source-map' : 'eval-source-map',
+  // ...
+}
+```
+
+Run webpack again
+
+```bash
+yarn webpack serve
+```
