@@ -191,3 +191,52 @@ render(<App />, document.getElementById('root'))
 ```bash
 yarn webpack
 ```
+
+## Static HTML
+
+Add `html-webpack-plugin`
+
+```bash
+yarn add html-webpack-plugin -D
+```
+
+Remove `<script src="../dist/bundle.js"></script>` from `index.html`
+
+`webpack.config.js`
+
+```js
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+
+module.exports = {
+  mode: 'development',
+  entry: path.resolve(__dirname, 'src', 'index.jsx'),
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js'
+  },
+  resolve: {
+    extensions: ['.js', '.jsx']
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'public', 'index.html')
+    })
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.jsx$/,
+        exclude: /node_modules/,
+        use: 'babel-loader'
+      }
+    ]
+  }
+}
+```
+
+```bash
+yarn webpack
+```
+
+A new file `dist/index.html` appears with the script tag.
