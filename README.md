@@ -369,3 +369,19 @@ Add new rule at `webpack.config.js`
         use: ['style-loader', 'css-loader']
       },
 ```
+
+## Using SASS
+
+```bash
+yarn add node-sass sass-loader -D
+```
+
+Change `webpack.config.js`
+
+```js
+      {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        use: ['style-loader', 'css-loader', 'sass-loader']
+      },
+```
