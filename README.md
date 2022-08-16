@@ -1,6 +1,6 @@
 # Setup
 
-## React
+## ReactJS
 
 ```bash
 yarn init -y
@@ -116,6 +116,76 @@ Change `/src/index.jsx`
 ```jsx
 import React from 'react'
 import { App } from './App'
+```
+
+```bash
+yarn webpack
+```
+
+## ReactJS structure
+
+`/public/index.html`
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Github Explorer</title>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="../dist/bundle.js"></script>
+</body>
+</html>
+```
+
+`/src/index.jsx`
+
+```jsx
+import React from 'react'
+import { render } from 'react-dom'
+import { App } from './App'
+
+render(<h1>Test</h1>, document.getElementById('root'))
+```
+
+```bash
+yarn webpack
+```
+
+Open the `index.html` in a browser.
+
+Remove `import React from 'react'` from `/src/index.jsx` and add `babel.config.js`
+
+```js
+module.exports = {
+  presets: [
+    '@babel/preset-env',
+    [
+      '@babel/preset-react',
+      {
+        runtime: 'automatic'
+      }
+    ]
+  ]
+}
+```
+
+```bash
+yarn webpack
+```
+
+Change `/src/index.jsx`
+
+```jsx
+import { render } from 'react-dom'
+import { App } from './App'
+
+render(<App />, document.getElementById('root'))
 ```
 
 ```bash
