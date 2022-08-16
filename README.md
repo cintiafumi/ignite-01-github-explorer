@@ -312,3 +312,40 @@ Run webpack again
 ```bash
 yarn webpack serve
 ```
+
+## Dev and Prod environment
+
+Change `webpack.config.js`
+
+```js
+const isDevelopment = process.env.NODE_ENV !== 'production'
+
+module.exports = {
+  mode: isDevelopment ? 'development' : 'production',
+  devtool:  isDevelopment ? 'eval-source-map' : 'source-map',
+  // ...
+}
+```
+
+Linux and Mac can understand the command line instruction to add an environment variable, but Windows can't.
+
+```bash
+NODE_ENV=production yarn webpack
+```
+
+Add `cross-env`
+
+```bash
+yarn add cross-env -D
+```
+
+Add the scripts in `package.json`
+
+```json
+{
+  "scripts": {
+    "dev": "webpack serve",
+    "build": "cross-env NODE_ENV=production webpack"
+  },
+}
+```
