@@ -349,3 +349,23 @@ Add the scripts in `package.json`
   },
 }
 ```
+
+## Importing CSS
+
+```css
+
+```
+
+```bash
+yarn add style-loader css-loader -D
+```
+
+Add new rule at `webpack.config.js`
+
+```js
+      {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        use: ['style-loader', 'css-loader']
+      },
+```
