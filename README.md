@@ -385,3 +385,52 @@ Change `webpack.config.js`
         use: ['style-loader', 'css-loader', 'sass-loader']
       },
 ```
+
+## React Refresh Webpack Plugin
+
+Enable the hot reloading
+
+```bash
+yarn add -D @pmmmwh/react-refresh-webpack-plugin react-refresh
+```
+
+`webpack.config.js`
+
+```js
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
+
+const isDevelopment = process.env.NODE_ENV !== 'production'
+
+module.exports = {
+  // ...
+  devServer: {
+    static: path.resolve(__dirname, 'public'),
+    hot: true,
+  },
+  plugins: [
+    isDevelopment && new ReactRefreshWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'public', 'index.html')
+    })
+  ].filter(Boolean),
+  module: {
+    rules: [
+      {
+        test: /\.jsx$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            plugins: [
+              isDevelopment && require.resolve('react-refresh/babel')
+            ].filter(Boolean)
+          }
+        }
+      },
+      // ...
+    ]
+  }
+}
+```

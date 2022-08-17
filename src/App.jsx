@@ -1,6 +1,8 @@
+import Counter from './components/Counter'
 import './styles/global.scss'
 
 export function App() {
-  // throw new Error('eita, o forninho caiu')
-  return <h1>Hello ReactJS</h1>
+  return (
+    <Counter />
+  )
 }
