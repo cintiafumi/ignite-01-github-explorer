@@ -434,3 +434,73 @@ module.exports = {
   }
 }
 ```
+
+## Typescript
+
+```bash
+yarn add typescript -D
+
+yarn tsc --init
+```
+
+`tsconfig.json
+
+```json
+{
+  "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "esnext"],                                        
+    "jsx": "react-jsx",                                
+    "moduleResolution": "node",                       
+    "resolveJsonModule": true,                        
+    "allowJs": true,                                  
+    "noEmit": true,                                   
+    "isolatedModules": true,                          
+    "allowSyntheticDefaultImports": true,             
+    "esModuleInterop": true,                             
+    "forceConsistentCasingInFileNames": true,            
+    "strict": true,                                      
+    "skipLibCheck": true                                 
+  },
+  "include": ["src"]
+}
+```
+
+```bash
+yarn add @babel/preset-typescript -D
+```
+
+`babel.config.js`
+
+```js
+module.exports = {
+  presets: [
+    '@babel/preset-env',
+    '@babel/preset-typescript', // add this line
+    [
+      '@babel/preset-react',
+      {
+        runtime: 'automatic'
+      }
+    ]
+  ]
+}
+```
+
+`webpack.config.js`
+
+```js
+module.exports = {
+  entry: path.resolve(__dirname, 'src', 'index.tsx'),
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx']
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(j|t)sx$/,
+        // ...
+      }
+    ]
+  }
+}
+```
